@@ -54,8 +54,15 @@
       Start code
 
       ===================== */
-
-      var jsonToCsv = function(json) { console.log(json); };
+      var newArr = [];
+      var jsonToCsv = function(json) {
+        for (var i=0,i<=45,i++) {
+          if (i==0) {
+            newArr.push(Object.keys(json[0]));
+          }
+          newArr.push(Object.values(json[i]));
+      }
+      console.log(json); };
 
 
       var addMarkers = function(map) {};
