@@ -54,18 +54,40 @@
       Start code
 
       ===================== */
-      var newArr = [];
       var jsonToCsv = function(json) {
-        for (var i=0,i<=45,i++) {
+        var newArr = [];
+        for (var i = 0;i<json.length;i++){
           if (i==0) {
-            newArr.push(Object.keys(json[0]));
+            newArr.push(Object.keys(json[i]))
+          };
+          newArr.push(Object.values(json[i]))
+        };
+        json = newArr;
+        console.log(json); };
+
+
+      var addMarkers = function(map) {
+        var myIcon = L.icon({
+          iconUrl: 'images/marker-icon-2x.png',
+          iconSize: [38, 60],
+          iconAnchor: [22, 94],
+          popupAnchor: [-3, -76],
+          shadowUrl: 'images/marker-shadow.png',
+          shadowSize: [68, 60],
+          shadowAnchor: [22, 94]
+        });
+        for ( var i=0; i < healthCenters.length; i++ ) {
+          if (healthCenters[i].DENTAL_PHONE !== "N/A"){
+            L.marker( [healthCenters[i].LAT, healthCenters[i].LNG], {icon: myIcon} )
+            .bindPopup( '<a href="' + healthCenters[i].WEBSITE + '" target="_blank">' + healthCenters[i].NAME + '</a>' )
+            .addTo( map );
+          } else {
+            L.marker( [healthCenters[i].LAT, healthCenters[i].LNG] )
+            .bindPopup( '<a href="' + healthCenters[i].WEBSITE + '" target="_blank">' + healthCenters[i].NAME + '</a>' )
+            .addTo( map );
           }
-          newArr.push(Object.values(json[i]));
-      }
-      console.log(json); };
-
-
-      var addMarkers = function(map) {};
+        }
+      };
 
       /* =====================
 
